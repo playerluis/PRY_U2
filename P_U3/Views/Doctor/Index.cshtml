@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Doctor>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Inicio</h1>
+
+<p>
+    <a asp-action="Create" class="material-button nuevo">Crear Nuevo</a>
+</p>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Especialidad)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cedula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Especialidad!.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="material-button">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="material-button">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="material-button">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
