@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] -SCM - Sistema de Citas Médicas &copy; 2023</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <script src="https://kit.fontawesome.com/c903d303d4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.8/index.global.min.js"></script>
+
+</head>
+<body class="d-flex min-vh-100 h-100">
+<aside class="d-flex flex-column flex-shrink-0 p-3 text-white bg-success"
+       style="
+            width: 280px;
+            border-right: rgba(173,181,189,0.3) 1px solid;
+            position: fixed;
+            height: 100%;
+       ">
+
+    <a asp-controller="Home" asp-action="Index" class="d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto text-decoration-none text-white">
+        <div class="mx-2 fs-2">
+            <i class="fa-solid fa-hospital"></i>
+        </div>
+        <span class="fs-1 fw-bold">SCM</span>
+    </a>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+            <a asp-controller="Home" asp-action="Index" class="nav-link text-white">
+                <i class="fa-solid fa-house"></i>
+                Inicio
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Cita" asp-action="Index" class="nav-link text-white">
+                <i class="fa-solid fa-calendar"></i>
+                Citas
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Paciente" asp-action="Index" class="nav-link text-white">
+                <i class="fa-solid fa-user"></i>
+                Pacientes
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Doctor" asp-action="Index" class="nav-link text-white">
+                <i class="fa-solid fa-user-md"></i>
+                Doctores
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Usuario" asp-action="Index" class="nav-link text-white">
+                <i class="fa-solid fa-user"></i>
+                Usuarios
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Especialidad" asp-action="Index" class="nav-link text-white">
+                <i class="fa-solid fa-user-md"></i>
+                Especialidades
+            </a>
+        </li>
+    </ul>
+    <hr>
+    <div class="dropdown">
+        <a href="#"
+           class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+           id="dropdownUser1"
+           data-bs-toggle="dropdown"
+           aria-expanded="false">
+            <strong>
+                Invitado
+            </strong>
+        </a>
+        <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser1">
+            <li>
+                <a class="dropdown-item" href="#">Ajustes</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="#">Perfil</a>
+            </li>
+            <li>
+                <hr class="dropdown-divider">
+            </li>
+            <li>
+                @if (User.Identity is { IsAuthenticated: true })
+                {
+                    <form class="dropdown-item d-flex align-items-center" method="post" asp-action="Logout" asp-controller="Access">
+                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <button type="submit" class="dropdown-item">Cerrar Sesión</button>
+                    </form>
+                }
+                else
+                {
+                    <a class="dropdown-item d-flex align-items-center" asp-action="Login" asp-controller="Access">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        Iniciar Sesión
+                    </a>
+                }
+            </li>
+        </ul>
+    </div>
+</aside>
+
+<main class="container-fluid" style="width: calc(100% - 280px); margin-left: 280px">
+    <div class="row mt-3">
+        <div class="col d-flex justify-content-center">
+            <h1 class="fw-bold">Sistema de Citas Medicas</h1>
+        </div>
+        <hr>
+    </div>
+    <div>
+        @RenderBody()
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - SCM - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+</main>
+
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+<script>
+const currentUrl = window.location.href;
+const navLinks = document.querySelectorAll('.nav-link');
+navLinks.forEach(function(navLink) {
+  if (navLink.href === currentUrl) {
+    navLink.classList.add('active');
+  }
+});
+</script>
+</body>
+</html>

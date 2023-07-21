@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap");
+
+:root {
+    --bs-body-font-family: 'Montserrat', var(--bs-font-sans-serif), sans-serif;
+    --my-primary-color: #3f51b5;
+    --my-on-primary-color: #ffffff;
+}
+
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/* Estilos básicos del botón */
+.material-button {
+    background-color: var(--my-primary-color);
+    color: var(--my-on-primary-color);
+    padding: 4px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+}
+
+.nuevo {
+    background-color: #4caf50;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+/* Cambio de color del botón al pasar el mouse */
+.material-button:hover {
+    background-color: #5c6bc0;
+    color: var(--my-on-primary-color);
+}
+
+/* Cambio de color del botón al hacer clic */
+.material-button:active {
+    background-color: #3949ab;
+}

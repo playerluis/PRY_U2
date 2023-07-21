@@ -1,0 +1,62 @@
+﻿@model LoginModel
+
+@{
+    ViewBag.Title = "Inicio de sesión";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - SCM - Sistema de Citas Médicas &copy; 2023</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <script src="https://kit.fontawesome.com/c903d303d4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar-scheduler@6.1.8/index.global.min.js"></script>
+</head>
+<body class="d-flex flex-column align-items-center">
+
+<div class="d-flex justify-content-center align-items-center">
+    <h1 class="fs-4">
+        <i class="fa-solid fa-hospital my-5 fs-1"></i>
+        SISTEMA DE CITAS MEDICAS
+    </h1>
+</div>
+<div class="card w-75">
+    <div class="card-header fs-2 text-center py-3">
+        <i class="fa-solid fa-user-circle"></i>
+        Iniciar Sesion
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-7">
+                <form asp-action="Login" asp-controller="Access" method="post">
+                    @if (ViewData["Error"] != null)
+                    {
+                        <span class="text-danger">
+                            @ViewData["Error"]
+                        </span>
+                    }
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" class="form-control"/>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Contrasenia" class="control-label"></label>
+                        <input asp-for="Contrasenia" class="form-control"/>
+                        <span asp-validation-for="Contrasenia" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Login" class="btn btn-primary mt-2"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
