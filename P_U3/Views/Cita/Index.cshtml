@@ -1,0 +1,100 @@
+﻿@model IEnumerable<P_U3.Models.Cita>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Inicio</h1>
+<div id="calendar"></div>
+<script>
+    let dates = @Html.Raw(Json.Serialize(Model.Select(cita => new
+                {
+                    id = cita.Id,
+                    title = $"{cita.Paciente?.Nombre} {cita.Paciente?.Apellido}",
+                    description = $"P: {cita.Paciente?.Nombre} <br> D: {cita.Doctor?.Nombre}",
+                    start = new DateTime(
+                        cita.Fecha.Year,
+                        cita.Fecha.Month,
+                        cita.Fecha.Day,
+                        cita.HoraDeInicio.Hour,
+                        cita.HoraDeInicio.Minute,
+                        cita.HoraDeInicio.Second
+                        ),
+                    end = new DateTime(
+                        cita.Fecha.Year,
+                        cita.Fecha.Month,
+                        cita.Fecha.Day,
+                        cita.HoraDeInicio.Hour + cita.Horas,
+                        cita.HoraDeInicio.Minute,
+                        cita.HoraDeInicio.Second
+                        ),
+                    url = ""
+                }).ToArray()))
+                
+    document.addEventListener('DOMContentLoaded', function () {
+        const calendarEl = document.getElementById('calendar');
+        const calendar = new FullCalendar.Calendar(calendarEl, {
+            locale:"es",
+            height: 350,
+            timeZone: 'UTC',
+            initialView: 'timeGridWeek',
+            aspectRatio: 1.5,
+            headerToolbar: {
+            },
+            events: dates
+        });
+        calendar.render();
+    });
+</script>
+<p>
+    <a asp-action="Create" class="material-button nuevo">Crear Nuevo</a>
+</p>
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Fecha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HoraDeInicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Horas)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Doctor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Paciente)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HoraDeInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Horas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Doctor!.Apellido)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Paciente!.Apellido)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="material-button">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="material-button">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="material-button">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
