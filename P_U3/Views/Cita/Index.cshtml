@@ -46,6 +46,7 @@
         calendar.render();
     });
 </script>
+<br>
 <p>
     <a asp-action="Create" class="material-button nuevo">Crear Nuevo</a>
 </p>
@@ -90,9 +91,9 @@
                 @Html.DisplayFor(modelItem => item.Paciente!.Apellido)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="material-button">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id" class="material-button">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id" class="material-button">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="material-button">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id" class="material-button">Detalles</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" class="material-button">Eliminar</a>
             </td>
         </tr>
     }
